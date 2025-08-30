@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C4 Global for Turkey - Troll Editler</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            /* Metin seçimini engelle */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            /* Sürüklemeyi engelle */
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 75% 75%, rgba(255, 107, 107, 0.1) 0%, transparent 25%);
+            pointer-events: none;
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                transform: translateX(-10px) translateY(-10px) scale(1);
+            }
+            100% {
+                transform: translateX(10px) translateY(10px) scale(1.02);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .star {
+            width: 45px;
+            height: 45px;
+            background: 
+                linear-gradient(145deg, #FFD700, #FFA500);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            box-shadow: 
+                0 5px 15px rgba(255,215,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .star:hover::before {
+            opacity: 1;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #FFD700, #FF6B6B, #4ECDC4, #45B7D1);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            animation: gradientShift 6s ease-in-out infinite;
+            position: relative;
+        }
+
+        .main-title::after {
+            content: 'C4 GLOBAL FOR TURKEY';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #FFD700, #FF6B6B, #4ECDC4, #45B7D1);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(3px);
+            opacity: 0.3;
+            z-index: -1;
+            animation: gradientShift 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .video-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 
+                0 8px 32px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .video-card:hover::before {
+            left: 100%;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 60px rgba(255,215,0,0.4),
+                0 0 0 1px rgba(255,215,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            border-color: rgba(255,215,0,0.5);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 25px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .video-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(0,0,0,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: 
+                linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.8),
+                inset 0 -1px 0 rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .play-button:hover {
+            transform: scale(1.15);
+            box-shadow: 
+                0 12px 35px rgba(0,0,0,0.4),
+                0 0 0 3px rgba(255,215,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 20px solid #333;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 5px;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+
+        .video-description {
+            font-size: 0.9rem;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .game-showcase {
+            background: 
+                linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.3),
+                0 5px 15px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .game-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                repeating-conic-gradient(
+                    from 0deg at 50% 50%,
+                    transparent 0deg,
+                    rgba(255,255,255,0.1) 15deg,
+                    transparent 30deg
+                );
+            animation: rotateBackground 30s linear infinite;
+        }
+
+        .game-showcase:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 25px 50px rgba(255,215,0,0.4),
+                0 10px 25px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+
+        @keyframes rotateBackground {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Join Section Styles */
+        .join-section {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .join-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .join-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.1) 10deg, transparent 20deg);
+            animation: rotateBackground 10s linear infinite;
+            z-index: 0;
+        }
+
+        .join-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-title {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-description {
+            color: rgba(255,255,255,0.9);
+            font-size: 16px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .join-button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .join-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff5252, #ffc107);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #ff6b6b;
+        }
+
+        .modal-content h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #feca57;
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 20px rgba(254, 202, 87, 0.3);
+        }
+
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff5252, #ffc107);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .form-group option {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .game-icon {
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-subtext {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .youtube-badge {
+            background: #FF0000;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .star {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+            <h1 class="main-title">C4 GLOBAL FOR TURKEY</h1>
+        </div>
+
+        <div class="content-grid">
+            <div class="video-card" onclick="window.open('https://www.youtube.com/shorts/uIMqUDeRLJ8', '_blank')" style="cursor: pointer;">
+                <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/uIMqUDeRLJ8/maxresdefault.jpg'); background-size: cover; background-position: center;">
+                    <div class="play-button">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <h3 class="video-title">Eller yanıyo knk en az 40</h3>
+                <p class="video-description">Valorant oyununda eğlenceli anlar ve komik trol editler. #valorant #valorantclips</p>
+                <div class="youtube-badge">📺 YouTube Shorts</div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/RqIRgSs7CTY/maxresdefault.jpg'); background-size: cover; background-position: center;">
+                    <div class="play-button">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <h3 class="video-title">Escape The Backrooms Trol Edit</h3>
+                <p class="video-description">Backrooms oyununda korku ve komedi karışımı. Arkadaşlarla birlikte oynanan eğlenceli trol anları.</p>
+                <div class="youtube-badge">📺 YouTube</div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/18IiWeS-ZF8/maxresdefault.jpg'); background-size: cover; background-position: center;">
+                    <div class="play-button">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <h3 class="video-title">Karışık Valorant Trol Edit</h3>
+                <p class="video-description">Valorant oyununda karışık trol anları ve komik editler. Eğlenceli oyun deneyimleri.</p>
+                <div class="youtube-badge">📺 YouTube</div>
+            </div>
+
+            <div class="join-section">
+                <div class="join-card">
+                    <div class="join-icon">🎮</div>
+                    <h3 class="join-title">Bu İçeriklere Katılmak İstiyorsun?</h3>
+                    <p class="join-description">Bizimle oyun oyna, videolarda yer al ve eğlenceli anları paylaş!</p>
+                    <button class="join-button" onclick="showJoinForm()">Katılmak İçin Tıkla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Form Modal -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeJoinForm()">&times;</span>
+            <h2>Katılım Formu</h2>
+            <form id="joinForm" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="fullName">Ad Soyad *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Yaş *</label>
+                    <input type="number" id="age" name="age" min="17" max="99" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Telefon Numarası *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="discord">Discord Kullanıcı Adı *</label>
+                    <input type="text" id="discord" name="discord" placeholder="örnek: kullanici#1234" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-posta Adresi *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">Oyun Deneyimi *</label>
+                    <select id="experience" name="experience" required>
+                        <option value="">Seçiniz...</option>
+                        <option value="beginner">Yeni Başlayan</option>
+                        <option value="intermediate">Orta Seviye</option>
+                        <option value="advanced">İleri Seviye</option>
+                        <option value="pro">Profesyonel</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="games">Hangi Oyunları Oynuyorsun? *</label>
+                    <textarea id="games" name="games" placeholder="Valorant, CS:GO, Minecraft vb." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button">Başvuruyu Gönder</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Metin seçimini ve kopyalamayı engelleme
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sağ tık menüsünü engelle
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Metin seçimini engelle
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Drag işlemini engelle
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Klavye kısayollarını engelle (Ctrl+C, Ctrl+A, Ctrl+S, F12, vb.)
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+C (Kopyala)
+                if (e.ctrlKey && e.keyCode === 67) {
+                    e.preventDefault();
+                    return false;
+                }
+                // Ctrl+A (Tümünü Seç)
+                if (e.ctrlKey && e.keyCode === 65) {
+                    e.preventDefault();
+                    return false;
+                }
+                // Ctrl+S (Kaydet)
+                if (e.ctrlKey && e.keyCode === 83) {
+                    e.preventDefault();
+                    return false;
+                }
+                // Ctrl+U (Kaynak Kodu Görüntüle)
+                if (e.ctrlKey && e.keyCode === 85) {
+                    e.preventDefault();
+                    return false;
+                }
+                // F12 (Geliştirici Araçları)
+                if (e.keyCode === 123) {
+                    e.preventDefault();
+                    return false;
+                }
+                // Ctrl+Shift+I (Geliştirici Araçları)
+                if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                    e.preventDefault();
+                    return false;
+                }
+                // Ctrl+Shift+C (Element Seçici)
+                if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+                    e.preventDefault();
+                    return false;
+                }
+                // Ctrl+Shift+J (Konsol)
+                if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Konsol uyarısı
+            console.clear();
+            console.log('%cDUR!', 'color: red; font-size: 50px; font-weight: bold;');
+            console.log('%cBu bir tarayıcı özelliğidir ve geliştiriciler için tasarlanmıştır. Birisi size buraya kod kopyalayıp yapıştırmanızı söylediyse, bu bir dolandırıcılık girişimidir ve onlara hesabınıza erişim sağlayacaktır.', 'color: red; font-size: 16px;');
+        });
+
+        // Video kartlarına tıklama efekti ve YouTube linklerini açma
+        const videoLinks = [
+            'https://www.youtube.com/shorts/uIMqUDeRLJ8',
+            'https://www.youtube.com/watch?v=RqIRgSs7CTY',
+            'https://www.youtube.com/watch?v=18IiWeS-ZF8'
+        ];
+
+        document.querySelectorAll('.video-card').forEach((card, index) => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    // YouTube videosunu yeni sekmede aç
+                    if (videoLinks[index]) {
+                        window.open(videoLinks[index], '_blank');
+                    }
+                }, 150);
+            });
+            
+            // Hover efekti için cursor pointer ekle
+            card.style.cursor = 'pointer';
+        });
+
+        // Oyun showcase kartına tıklama efekti
+        document.querySelector('.game-showcase').addEventListener('click', function() {
+            this.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+        });
+
+        // Yıldızlara hover efekti
+        document.querySelectorAll('.star').forEach((star, index) => {
+            star.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.2) rotate(72deg)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            star.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Join form functions
+        function showJoinForm() {
+            document.getElementById('joinModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeJoinForm() {
+            document.getElementById('joinModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // Form verilerini al
+            const formData = new FormData(event.target);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Basit validasyon
+            if (data.age < 17) {
+                alert('Yaşınız en az 17 olmalıdır!');
+                return;
+            }
+            // Discord webhook'una gönder
+            const webhookUrl = 'https://discord.com/api/webhooks/1411281699764961370/9CU0bMw4ru3hld7Soqsusj6gQOPbTH-FmtA9vX9-nHc5_ZF_2gIMXVrUqCIh7YK7FW3S';
+            
+            const embed = {
+                title: '🎮 Yeni Katılım Başvurusu',
+                color: 0x667eea,
+                fields: [
+                    { name: '👤 Ad Soyad', value: data.fullName, inline: true },
+                    { name: '🎂 Yaş', value: data.age, inline: true },
+                    { name: '📞 Telefon', value: data.phone, inline: true },
+                    { name: '💬 Discord', value: data.discord, inline: true },
+                    { name: '📧 E-posta', value: data.email, inline: true },
+                    { name: '🎯 Deneyim', value: data.experience, inline: true },
+                    { name: '🎮 Oyunlar', value: data.games, inline: false }
+                ],
+                timestamp: new Date().toISOString(),
+                footer: {
+                    text: 'C4 Global Turkey Başvuru Sistemi'
+                }
+            };
+            
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    embeds: [embed]
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Başvurunuz başarıyla gönderildi! En kısa sürede sizinle iletişime geçeceğiz.');
+                    event.target.reset();
+                    closeJoinForm();
+                } else {
+                    throw new Error('Başvuru gönderilirken hata oluştu');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Başvuru gönderilirken bir hata oluştu. Lütfen tekrar deneyiniz.');
+            });
+        }
+
+        // Modal dışına tıklandığında kapat
+        window.onclick = function(event) {
+            const modal = document.getElementById('joinModal');
+            if (event.target === modal) {
+                closeJoinForm();
+            }
+        }
+
+        // ESC tuşu ile modal'ı kapat
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeJoinForm();
+            }
+        });
+    </script>
+</body>
+</html>
